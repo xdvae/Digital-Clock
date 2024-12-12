@@ -3,13 +3,29 @@ body{
     padding: 0px;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     transition: all 0.3s ease-in-out;
+    overflow: hidden;
 }
 .screen{
-    height: 1028px;
-    width: 99.8%;
+    height: 51.7rem;
+    width: 100%;
     /* border: 1px solid red; */
     display: block;
+
+    background-image: linear-gradient(135deg,  rgb(50, 98, 171), rgba(43, 85, 175, 0.603), rgb(211, 108, 48), rgb(33, 117, 201), rgb(33, 145, 201), rgba(129, 203, 203, 0.1), #2c3e50, #0b3f74, #f77433, #f53900,#2c3e50, 
+    #061f39,rgba(43, 85, 175, 9.603));
+
+    transition: all 2s ease-in-out;
+    background-size: 1000%;
+    background-repeat: no-repeat;
+    background-position: 0rem; 
 }
+/* Background positions to time of day:
+    0 : Sunrise,
+    -270 : Midday,
+    -525 : Sunset,
+    -850 : night, 1000% zoom 
+
+*/
 .nav{
     height: 70px;
     width: 100%;
@@ -26,10 +42,10 @@ body{
     margin-top: 20px;
     transition: all 0.3s ease-in-out;
 }
-.Dark_mode_btn_1:hover{
+/* .Dark_mode_btn_1:hover{
     cursor: pointer;
     box-shadow: 0px 30px 100px black;
-}
+} */
 .Dark_mode_btn_2{
     height: 35px;
     width: 120px;
@@ -40,18 +56,23 @@ body{
     margin-top: 20px;
     transition: all 0.3s ease-in-out;
 }
-.Dark_mode_btn_2:hover{
+/* .Dark_mode_btn_2:hover{
     cursor: pointer;
     box-shadow: 0px 30px 100px rgb(255, 255, 255);
-}
+} */
 .clock{
     height: 400px;
     width: 1200px;
-    /* border: 1px solid green; */
+    /* border: 1px solid red; */
     margin: auto;
-    margin-top: 180px;
-    display: flex;
-    padding: 15px;
+    margin-top: 105px;
+    display: block;
+    /* padding: 15px; */
+}
+.country-box{
+    height: 35px;
+    /* border: 1px solid rgb(147, 58, 203); */
+    width: 100%;
 }
 .search-bar{
     height: 80px;
@@ -60,26 +81,155 @@ body{
     margin: auto;
     margin-top: 20px;
 }
+.search-bar-input{
+    height: 40px;
+    width: 500px;
+    /* margin-top: 1rem; */
+    /* margin-left: 9rem;
+    border-radius: 15px; */
+    font-size: large;
+    /* padding-left: 10px;  */
+    border: none;
+    outline: none;
+}
+.search-bar-line{
+    height: 40px;
+    width: 600px;
+    border: 1px solid black;
+    border-radius: 15px;
+    margin-top: 1rem;
+    margin-left: 6rem;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    padding-left: 10px;
+    background-color: white;
+}
+.search-btn{
+    height: 30px;
+    width: 70px;
+    /* background-color: white; */
+    border: none;
+    font-size: x-large;
+    text-align: right;
+    -webkit-background-clip: text;
+    animation: search_text_color 10s linear infinite;
+    transition: all 0.5s ease-in-out;
+    
+}
+.search-btn:hover{
+    cursor: pointer;
+}
+.search-btn:hover{
+    color: rgb(154, 175, 193);
+}
+
+@keyframes search_text_color {
+    0%{
+        color: hotpink;
+    }
+    25%{
+        color: red;
+    }
+    50%{
+        color: aquamarine;
+    }
+    75%{
+        color: rgb(31, 41, 105);
+    }
+    100%{
+        color: hotpink;
+    }
+    
+    
+}
 .c-box{
-    height: 400px;
+    height: 300px;
     width: 280px;
-    /* border: 1px solid rgb(208, 0, 255); */
-    margin: auto;
-    display: block;
+    border: none;
+    /* margin: auto; */
+    display: inline-block;
+    margin-left: 5rem;
 }
 .am-pm{
     height: 50px;
     width: 80px;
     /* border: 1px solid navy; */
-    margin-top: 350px;
+    margin-top: 310px;
+    /* border: 1px solid blue; */
+    float: right;
 }
 .c-box h1{
     font-size: 170px;
     text-align: center;
-    margin-top: 100px;
+    margin-top: 70px;
+}
+.current-country-name {
+    font-size: 20px;
+    margin-left: 15px;
 }
 .am-pm-text{
     margin-top: 10px;
     margin-left: 10px;
     font-weight: 900;
 }
+@media (max-width: 600px) {
+    body{
+        margin: 0;
+        padding: 0;
+    }
+    .screen{
+        height: 41rem;
+        /* border: 1px solid red; */
+    }
+    .Dark_mode_btn_1, .Dark_mode_btn_2 {
+        width: 40%;
+        margin:10px auto;
+        margin-left: 7.5rem;
+    }
+
+    .clock {
+        width: 91%;
+        margin-top: 0rem;
+        border: 1px solid black; 
+        display: flex;   
+    }
+
+    .search-bar {
+        height: 10rem;
+        width: 100%;
+        margin-top: 10px;
+        /* border: 1px solid cyan; */
+    }
+
+    .c-box {
+        height: 10rem;
+        width: 100%;
+        /* border: 1px solid yellow; */
+        margin: auto;
+        margin-right: 5%;
+    }
+
+    .c-box h1 {
+        font-size: 12vw;
+    }
+    .am-pm{
+        margin-top: 16rem;
+        margin-right: 2%;
+    }
+    .current-country-name {
+        font-size: 10px;
+        margin-left: 15px;
+        /* border: 1px solid yellow; */
+        width:180px;
+        position: fixed;
+    }
+    .search-bar-line{
+        margin: auto;
+        width: 80%;
+        margin-top: 1rem;
+    }
+
+}
+
+
