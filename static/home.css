@@ -4,6 +4,7 @@ body{
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     transition: all 0.3s ease-in-out;
     overflow: hidden;
+    color: white;
 }
 .screen{
     height: 51.7rem;
@@ -80,6 +81,7 @@ body{
     /* border: 1px solid hotpink; */
     margin: auto;
     margin-top: 20px;
+
 }
 .search-bar-input{
     height: 40px;
@@ -107,21 +109,23 @@ body{
 }
 .search-btn{
     height: 30px;
-    width: 70px;
+    width: 38px;
     /* background-color: white; */
-    border: none;
     font-size: x-large;
     text-align: right;
     -webkit-background-clip: text;
     animation: search_text_color 10s linear infinite;
     transition: all 0.5s ease-in-out;
-    
+    border: none;
+    margin-left: 3rem;
 }
 .search-btn:hover{
     cursor: pointer;
+    
 }
-.search-btn:hover{
-    color: rgb(154, 175, 193);
+.search-btn:active{
+    -webkit-background-clip: none;
+    background-color: rgb(103, 122, 138);
 }
 
 @keyframes search_text_color {
@@ -162,14 +166,16 @@ body{
 .c-box h1{
     font-size: 170px;
     text-align: center;
-    margin-top: 70px;
+    margin-top: 1.5rem;
 }
 .current-country-name {
     font-size: 20px;
-    margin-left: 15px;
+    margin-left: 15.5rem;
+    /* border: 1px solid red; */
+    margin-top: 1rem;
 }
 .am-pm-text{
-    margin-top: 10px;
+    margin-top: 1rem;
     margin-left: 10px;
     font-weight: 900;
 }
@@ -231,5 +237,100 @@ body{
     }
 
 }
+.nav-btn-active{
+    /* margin-left: 1px; */
+    height: 35px;
+    width: 80px;
+    color: white;  background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent blue */
+    border: 2px solid rgba(255, 255, 255, 0.7); /* Matching border */
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, border 0.3s;
+    margin-top: 1rem;
+    
+}
+.nav-btn-inactive{
+    /* margin-left: 1px; */
+    height: 35px;
+    width: 80px;
+    color: rgb(156, 156, 156);  background-color: rgba(121, 121, 121, 0.2); /* Semi-transparent blue */
+    border: 2px solid rgba(114, 114, 114, 0.7); /* Matching border */
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, border 0.3s;
+    margin-top: 1rem;
+    
+}
+.nav-div-line{
+    font-size: large;
+    margin-left: -15px;
+}
+.Show-Time-Button{
+    margin-left: 43rem;
+    margin-right: 1rem;
+}
+.Weather{
+    height: 30rem;
+    width: 65rem;
+    border: 1px solid whitesmoke;
+    margin: auto;
+    margin-top: 0%;
+    display: none;
+    flex-wrap: wrap;
+    /* flex-direction: column; */
+}
+.temprature{
+    height: 15rem;
+    width: 14.6rem;
+    border: 1px solid red;
+    margin-left: 0px;
 
+}
+.temp-h3{
+    margin-left: 10px;
+    font-weight: 1;
+}
+.temp-h1{
+    margin: 2.5rem;
+    font-size: 40px;
+}
+.temp-h3-hl{
+    margin-left: 1.5rem;
+    font-weight: 5;
+    font-size: medium;
+}
+.ab-lst-1, .ab-lst-2{
+    /* border: 1px solid red; */
+    height: 15rem;
+    width: 24rem;
+    display: inline-block;
+}
+.about-current{
+    height: 15rem;
+    width: 50rem;
+    border: 1px solid hotpink;
+}
+.about-current ul{
+    margin-left: -1rem;
+}
+.about-current li{
+    list-style-type: none;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: larger;
+    margin-top: 1rem;
+}
+.about-future{
+    height: 15rem;
+    width: 65rem;
+    border: 1px solid yellow;
+    display: flex;
+}
+.future_box{
+    height: 14.8rem;
+    width: 15rem;
+    border: 1px solid #c93ff3;
+}
 
+/* Make buttons for the Weather TAB */

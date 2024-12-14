@@ -1,59 +1,38 @@
 let Run_Default_Time = 1;
 let Run_City_Time = 0;
 let Current_city = 0;
+let ip = 0;
 
-function Get_time(){
+function fetch_ip_and_location(){
+    console.log("Started step - 1: Fetching IP");
+    let ip = 0;
+    fetch("https://api.ipify.org?format=json")
+    .then(response => response.json())
+    .then(data => {
+        ip = data.ip;
+        console.log("IP: ",ip);
     
-    if(Run_Default_Time == 1){
-        Run_City_Time = 0;
-        fetch('/gettime') 
-        .then(response => response.json()) 
-        .then(data => { 
-            console.log(data.hour);
-            document.getElementById('hour').innerText = data.hour + ':';
-            document.getElementById('min').innerText = data.min + ':';
-            document.getElementById('sec').innerText = data.sec;
-            document.getElementById('am-pm-text').innerText = data.am_pm;
-            change_background(data.background_selector);
 
-        });
-        setTimeout(Get_time, 1000);
+    if(ip != 0){
+        console.log("Entered if statement. Sending Req to flask.");
+        fetch("/get_timzeone_via_ip", {
+            method: 'POST',
+            headers: 
+            { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            "IP" : ip
+        })}
+    ) 
+    .then(response => response.json()) 
+    .then(data => { 
 
+        Current_city = data.city_name;
+        console.log("City Name: "+Current_city)
+        Get_city_time()
+
+    });
     }
-}
-
-let dark_mode = 0;
-
-
-// function next_time(){
-//     console.log("reached here");
-//     let background = document.getElementById('screen');
-//     let currentPosition = window.getComputedStyle(background).backgroundPosition;
-
-//     if(currentPosition == '-130rem 0px'){
-//         background.style.backgroundPosition = '100rem';
-//     }
-//     else{
-//         background.style.backgroundPosition = '-130rem'
-//     }
-    
-// }
-// function set_Dark_Mode(){
-//     if(dark_mode == 0){
-//         dark_mode = 1;
-//         document.getElementById('body').style.color = 'white';
-//         document.getElementById('body').style.backgroundColor = 'black';
-//         document.getElementById('set_Dark_Mode').textContent = 'Set Light Mode';
-//         change_btn_class();
-//     }
-//     else if(dark_mode == 1){
-//         dark_mode = 0;
-//         document.getElementById('body').style.color = 'black';
-//         document.getElementById('body').style.backgroundColor = 'white';
-//         document.getElementById('set_Dark_Mode').textContent = 'Set Dark Mode';
-//         change_btn_class();
-//     }
-// }
+})}
 
 function change_btn_class(){
     var btn = document.getElementById("set_Dark_Mode");
@@ -67,7 +46,6 @@ function change_btn_class(){
     }
 }
 // TODO: Add getlocation to show time in user's current location when they enter the site. : done
-
 function Get_city_time(){
     Run_City_Time = 1;
     if(Run_City_Time == 1){
@@ -89,8 +67,11 @@ function Get_city_time(){
             document.getElementById('min').innerText = data.min + ':';
             document.getElementById('sec').innerText = data.sec;
             document.getElementById('am-pm-text').innerText = data.am_pm;
-            document.getElementById('current-country-name').innerHTML = "Current Timezone: " + data.current_timezone;
+            document.getElementById('current-country-name').innerHTML = "Current Timezone: " + data.current_timezone + " |   Current City: "+Current_city;
             change_background(data.background_selector);
+            document.getElementById("condition").innerHTML = data.condition;
+            document.getElementById("temp").innerHTML = data.temp+" °C";
+            document.getElementById("temp_hl").innerHTML =" High: "+ data.temp_h +"°C | Low: "+ data.temp_l +"°C";
         });
         setTimeout(Get_city_time, 1000);
     }
@@ -101,15 +82,15 @@ function change_background(background_selector){
 
     if(background_selector == "sunrise"){
         background.style.backgroundPosition = "0rem";
-        starsEffect.stopStars();
+
     }
     else if(background_selector == "morning"){
         background.style.backgroundPosition = "-270rem";
-        starsEffect.stopStars();
+
     }
     else if(background_selector == "sunset"){
         background.style.backgroundPosition = "-525rem";
-        starsEffect.stopStars()
+
     }
     else if(background_selector == "night"){
         var hour = document.getElementById("hour");
@@ -123,14 +104,44 @@ function change_background(background_selector){
         sec.style.color = "white";
         am_pm.style.color = "white";
         country_name.style.color = "white";
-        starsEffect.startStars();
+
     }
 }
 function update_city_value(){
     Current_city = document.getElementById('search-bar-input').value;
     Get_city_time();
 }
-window.onload = Get_time;
+function SwitchTabs(){
+    let Element_1 = document.getElementById('Show-Time-Button');
+    let Element_2 = document.getElementById('Show-Weather-Button');
+    let clock = document.getElementById('clock');
+    let Weather = document.getElementById('Weather');
 
-//Below is the code for stars
+    if(Element_1.classList.contains('nav-btn-active')){
+
+        Element_1.classList.remove('nav-btn-active')
+        Element_2.classList.remove('nav-btn-inactive')
+
+        Element_2.classList.add('nav-btn-active')
+        Element_1.classList.add('nav-btn-inactive')
+
+        clock.style.display = "none";
+        Weather.style.display = "flex";
+        
+    }
+    else{
+        Element_1.classList.remove('nav-btn-inactive')
+        Element_2.classList.remove('nav-btn-active')
+
+        Element_2.classList.add('nav-btn-inactive')
+        Element_1.classList.add('nav-btn-active')
+
+        clock.style.display = "block";
+        Weather.style.display = "none";
+        
+    }
+}
+window.onload = fetch_ip_and_location();
+
+
 
